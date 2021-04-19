@@ -1,0 +1,82 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>    
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Chat with a Friend</title>
+        
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <!-- favicon ends -->
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+                <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+        <style>
+        body {
+  background-color: black;
+}
+            .button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #f4511e;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #008CBA}
+
+.button:active {
+  background-color: #008CBA;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+        </style>
+        
+        <script src="js/config.js"></script>
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        
+    </head>
+    
+    
+    <body>
+        <input type="button" id='createRoom' class="button" value="Create Room" ><br><br><br><br>
+        
+        <div id="roomLink" class="button"></div>
+
+        <input type="button" id='addFriend' class="button" value="Add Friend" >
+        
+        <script>
+            var createBtn = document.querySelector("#createRoom");
+            var linkInput = document.querySelector("#roomLink");
+
+            createBtn.onclick = function(){
+                new Promise(function(resolve, reject){
+                    var room = Math.random().toString(36).slice(2).substring(0, 15);
+
+                    return room ? resolve(room) : reject(new Error("Could not create room"));
+                }).then(function(room){
+                    var roomLink =appRoot+"comm.html?room="+room;
+                    linkInput.innerHTML = '<a href="'+roomLink+'" target="_blank">Enter Room</a>';
+                }).catch(function(err){
+                    linkInput.innerHTML = err;
+                });
+            };
+        </script>
+    </body>
+</html>
